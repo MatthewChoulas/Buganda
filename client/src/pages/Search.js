@@ -22,7 +22,10 @@ export default function Search() {
 
     const [profiles, setProfiles] = useState([])
 
+    const [searchDisabled, setSearchDisabled] = useState(false)
+
     async function handleSearch() {
+        setSearchDisabled(true)
         await fetch("/api/search", {
             method:"POST",
             headers: {
@@ -42,6 +45,7 @@ export default function Search() {
             })
         }).then(response => response.json())
         .then(data => setProfiles(data))
+        setSearchDisabled(false)
     }
 
     console.log(profiles)
@@ -80,14 +84,14 @@ export default function Search() {
                                 </div>
                             </div>
                             
-                            <button onClick={handleSearch} className="mt-4 w-full text-white bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+                            <button onClick={handleSearch} disabled={searchDisabled} className="mt-4 w-full text-white bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
                         
                         </div>
                     </div>
                     <span className=" mt-8 h-0.5 w-full bg-gray-300 lg:w-[75vw]"></span>
                     <div className="flex flex-col gap-4 ">
                         {profiles.map((person) => 
-                            <UserProfile name={person.firstName + " " + person.lastName} location={person.city} phoneNumber={person.phoneNumber} gender={person.gender} clan={person.clan} depth={person.depth} age={person.age} description={person.description} photo={person.photo} ></UserProfile>
+                            <UserProfile name={person.firstName + " " + person.lastName} location={person.city} phoneNumber={person.phoneNumber} gender={person.gender} clan={person.clan} depth={person.depth} age={person.age} description={person.description} photo={person.photo}></UserProfile>
                             )}
                     </div>
                 </div>

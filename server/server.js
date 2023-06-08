@@ -44,6 +44,12 @@ app.post("/api/search", async (req, res) => {
     bfsResult = []
     const currUser = {...retrievedData.data(), depth: 0, id:req.body.currentUser}
     await breathFirstSearch(peopleRef, [currUser],[currUser.firstName + " " + currUser.lastName], req.body.filters)
+    console.log(req.body.sorting)
+    if (req.body.sorting == "Max Depth") {
+        bfsResult.reverse()
+    }
+    console.log(bfsResult)
+
     res.send(bfsResult)
 })
 
@@ -51,7 +57,6 @@ let bfsResult = []
 
 async function breathFirstSearch(dataRef, queue, visited, filters){
     if (!queue.length) {
-        console.log("empty")
         return new Promise((resolve, reject) => resolve(""))
     }
 
@@ -78,6 +83,10 @@ async function breathFirstSearch(dataRef, queue, visited, filters){
             if (filters.keyword.trim() == "" || checkKeyword(filters.keyword, profileText)){
                 
                 currPerson.age = getAge(currPerson.dateOfBirth?.startDate)
+
+                if (!currPerson.phoneNumberVisibility) {
+                    currPerson.phoneNumber = "●●●-●●●-●●●●"
+                }
 
                 await getDownloadURL(ref(storage, `images/${currPerson.id}`)).then((url) => {
                     currPerson.photo = url
@@ -116,7 +125,8 @@ async function breathFirstSearch(dataRef, queue, visited, filters){
 }
 
 function checkKeyword(word, text) {
-    return true
+    console.log(word, text)
+    return text.toLowerCase().includes(word.toLowerCase())
 }
 
 function getAge(dateString) {
