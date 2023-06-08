@@ -27,14 +27,26 @@ export default function({defaultValues, setValue}) {
     }, [defaultValues])
 
     //appends a new relation to the relations state if the user has entered a first and last Name
-    function addRelation() {
+    async function addRelation() {
         let newElement = {
             firstName: firstName,
             lastName: lastName,
             relationType: relationType,
             highlight: false
-            }
-        
+            } 
+        await fetch(
+                "/api/searchForName", {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                      },
+                    body: JSON.stringify({firstName: firstName, lastName: lastName})
+                }
+            ).then(response => response.json())
+            .then(data => {data ? newElement.highlight = true : newElement.highlight = false })
+
+        console.log(newElement)
         if (firstName != "" && lastName != "" && !((relations.map((element) => JSON.stringify(element))).includes(JSON.stringify(newElement)))) {
             setRelations(prevArray => [...prevArray, newElement])
         }
@@ -47,7 +59,8 @@ export default function({defaultValues, setValue}) {
 
     //used to ensure all relations are diplayed with the same case
     function capitalize(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
+        
+        return str != null ? str.charAt(0).toUpperCase() + str.slice(1) : ""
     }
 
 

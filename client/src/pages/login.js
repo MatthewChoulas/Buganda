@@ -11,6 +11,8 @@ function Login() {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
+
+    //submits the login and password to firebase and updates error state if there was an error
     async function handleSubmit(e) {
         e.preventDefault()
         

@@ -1,7 +1,7 @@
 import React from "react"
 import { useState, useEffect } from "react"
 
-export default function UserProfile({name, location, phoneNumber, gender, age, clan, description, photo}) {
+export default function UserProfile({name, location, phoneNumber, gender, age, depth, clan, description, photo}) {
 
     return (
 		<div class="flex w-screen items-center justify-center m-4 mt-8">
@@ -13,15 +13,16 @@ export default function UserProfile({name, location, phoneNumber, gender, age, c
                     <p className="text-white pt-4">{clan}</p>
                 </div>
                 <div className="flex flex-col bg-gray-100 w-[22rem] pt-2 pl-8">
-                    <div className="flex gap-3 pt-4">
+                    <div className="grid gap-3 pt-4 grid-cols-4 mb-1">
                         <span className="font-semibold">Gender: </span>
                         <span className="">{gender}</span>
-                        <span className="pl-8 font-semibold">Age: </span>
+                        <span className="pl-6 font-semibold">Age: </span>
                         <span className="">{age}</span>
-                    </div>
-                    <div className="flex gap-3 pt-3">
+                        
                         <span className="font-semibold">Location: </span>
                         <span className="">{location}</span>
+                        <span className="pl-6 font-semibold">Depth: </span>
+                        <span className="">{depth}</span>
                     </div>
                     <div className="flex gap-3 pt-3">
                         <span className="font-semibold">Phone-Number: </span>

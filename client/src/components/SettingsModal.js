@@ -8,8 +8,7 @@ import DateSelect from '../components/DateSelect'
 import DropDownSelect from '../components/DropDownSelect'
 import RelationInput from '../components/RelationsInput'
 import ToggleSelect from './ToggleSelect'
-import { db, storage} from '../util/firebase'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { storage} from '../util/firebase'
 import { ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import { useAuth } from '../contexts/AuthContext'
 
@@ -42,21 +41,22 @@ export default function SettingsModal({open, closeFunc}) {
 
     const [picHover, setPicHover] = useState(false)
 
-    //requests users personal data from the db
-    // returns a promise with the data object
-    const getUserData = async() =>
-        {
-        const userDataRef = doc(db, "users", currentUser.uid)
-        const retrievedData = await getDoc(userDataRef)
-        return retrievedData.data()
-        }
-    
-    //grabs user data from databse and updates varriable when the model opens
+    // makes request to server to get user data and sets userDataState to the servers response
     useEffect(() => {
-        console.log(userData)
-        const dataPromise = getUserData()
-        dataPromise.then((response) => (setUserData(response)))
-        
+        fetch("/api/getUserData", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({currentUser: currentUser.uid})
+        }).then(
+            response => response.json()
+        ).then(
+            data => {
+                setUserData(data)
+            }
+        )
     }, [])
     
     //checks that required field(first and last name) are filled out
@@ -68,7 +68,13 @@ export default function SettingsModal({open, closeFunc}) {
         } else {
             setShowRequired(false)
             try {
-                await setDoc(doc(db, "users", currentUser.uid), {
+                await fetch("/api/updateUserData", {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                      },
+                    body: JSON.stringify({currentUser: currentUser.uid, data: {
                     firstName: firstName,
                     lastName: lastName,
                     phoneNumber: phoneNumber,
@@ -80,14 +86,15 @@ export default function SettingsModal({open, closeFunc}) {
                     relations: relations,
                     description: description,
                     phoneNumberVisibility: phoneVisibility
-                })
-                window.location.reload();
+                }})
+            })
+                window.location.reload()
             } catch (e) {
                 console.log(e)
             }
         }
 
-        console.log("submitted")
+        
         setLoading(false)
     }
 
@@ -101,7 +108,8 @@ export default function SettingsModal({open, closeFunc}) {
         }
     }
 
-
+    //loads the users profile picture from firebase storage when the model opens
+    //user profiles are saved in the image directory and are named by the users UID
     useEffect(()=> {
             getDownloadURL(ref(storage, `images/${currentUser.uid}`)).then((url) => {
                 setProfilePic(url)
@@ -109,6 +117,8 @@ export default function SettingsModal({open, closeFunc}) {
     }, [])
 
 
+    //updates database when a file is selected
+    //attached to onChange of the file selector input
     function handleFileChange(event) {
         console.log("file exists")
         const file = event.target.files[0]
@@ -120,6 +130,7 @@ export default function SettingsModal({open, closeFunc}) {
         })
     }
 
+    //prevents html form being rendered if the model isn't open
     if (!open) return null
 
     return ReactDom.createPortal(
@@ -170,7 +181,7 @@ export default function SettingsModal({open, closeFunc}) {
                     <GenericTextInput label="City" defaultValue={userData?.city} setValue={setCity}/>
                     <GenericRadioInput label="Gender" id="registrationGender" defaultValue={userData?.gender} options={["Male", "Female", "Other"]} setValue={setGender}/>
                     <DateSelect label="Date of Birth" defaultValue={userData?.dateOfBirth} setValue={setDate}/>
-                    <DropDownSelect label="Clan" defaultValue={userData?.clan} options={["Nvoju"]} setValue={setClan}/>
+                    <DropDownSelect label="Clan" defaultValue={userData?.clan} options={["Njovu"]} setValue={setClan}/>
                     <GenericTextInput label="Short Personal Description" defaultValue={userData?.description} setValue={setDescription}/>
                     <div className="block pt-4">
                         <label className="block font-semibold mb-4 text-lg font-medium text-gray-900 dark:text-white">Add Relatives</label>

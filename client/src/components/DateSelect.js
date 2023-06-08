@@ -9,6 +9,8 @@ export default function DateSelect({label, defaultValue, setValue}) {
         setDateValue(newValue)
     } 
 
+    //update default values
+    //has to use a hook if the default value is coming from unloaded user data
     useEffect(() => {
         setDateValue(defaultValue)
         setValue(defaultValue)

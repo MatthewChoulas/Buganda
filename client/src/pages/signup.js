@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { useAuth } from '../contexts/AuthContext'
 import { Link , useNavigate} from 'react-router-dom'
+import logo from '../assets/blueLogo.png'
 
 
 function Signup() {
@@ -11,6 +12,7 @@ function Signup() {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
+    //submits the login and password to firebase and updates error state if there was an error
     async function handleSubmit(e) {
         e.preventDefault()
         
@@ -33,8 +35,8 @@ function Signup() {
     
     <section className="bg-gray-50 dark:bg-gray-900 h-screen">
   <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <div className="flex items-center mb-6 text-3xl font-semibold text-gray-900 dark:text-white">
-          <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo"></img>
+      <div className="flex gap-2 items-center mb-6 text-3xl font-semibold text-gray-900 dark:text-white">
+      <img className="w-12 h-12" src={logo} alt="logo"></img>
           Buganda Geneology
       </div>
       {error && <div className="w-full sm:max-w-md flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">

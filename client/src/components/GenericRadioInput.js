@@ -5,7 +5,11 @@ export default function GenericTextInput({label, id, defaultValue, options, setV
     const [radioValue, setRadioValue] = useState()
     function handleUpdate(e) {
         var value = ""
+
+        //get all radio buttons in the given component
         const selects = document.getElementsByClassName("radio " + id)
+
+        //find the value of the one which is checked
         for (const select of selects) {
             if (select.checked) {
                 value = select.value
@@ -16,6 +20,8 @@ export default function GenericTextInput({label, id, defaultValue, options, setV
         setRadioValue(value)
     } 
 
+    //update default values
+    //has to use a hook if the default value is coming from unloaded user data
     useEffect(() => {
         setRadioValue(defaultValue)
         setValue(defaultValue)

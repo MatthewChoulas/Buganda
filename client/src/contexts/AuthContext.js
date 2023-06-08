@@ -24,6 +24,7 @@ export function AuthProvider({ children }) {
         signOut(auth)
     }
 
+    //updates the current user when a new user is authorized
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
