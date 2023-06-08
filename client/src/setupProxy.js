@@ -5,7 +5,7 @@ module.exports = function (app) {
     '/api',
     createProxyMiddleware({
       // 👇️ make sure to update your target
-      target: process.env.PRODUCTION ? process.env.SERVER_URL : 'http://localhost:5005',
+      target: process.env.PORT,
       changeOrigin: true,
     }),
   );

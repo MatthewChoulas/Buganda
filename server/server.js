@@ -35,6 +35,7 @@ app.post("/api/searchForName", async (req, res) => {
     res.send(String(docCount != 0))
     
 })
+
 app.post("/api/search", async (req, res) => {
     const peopleRef = collection(db, "people")
     const userDataRef = doc(db, "users", req.body.currentUser)
@@ -51,13 +52,13 @@ let bfsResult = []
 async function breathFirstSearch(dataRef, queue, visited, filters){
     if (!queue.length) {
         console.log("empty")
-        return new Promise((resolve, reject) => resolve("hi"))
+        return new Promise((resolve, reject) => resolve(""))
     }
 
     currPerson = queue.pop()
     
     if (currPerson.depth > filters.maxDepth) {
-        return new Promise((resolve, reject) => resolve("hi"))
+        return new Promise((resolve, reject) => resolve(""))
     }
 
     
@@ -130,4 +131,4 @@ function getAge(dateString) {
 }
 
 
-app.listen(5005, () => console.log("Server started on port 5005"))
+app.listen(process.env.PORT, () => console.log("Server started on port 5005"))
