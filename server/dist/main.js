@@ -1,1 +1,1 @@
-modules.export={browser:"server.js",mode:process.env.MODE};
+modules.export={browser:{fs:!1,path:!1,os:!1},mode:process.env.MODE};

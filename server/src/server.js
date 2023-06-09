@@ -142,3 +142,8 @@ function getAge(dateString) {
 
 
 app.listen(process.env.PORT, () => console.log("Server started on port 5005"))
+
+modules.export = {
+    browser: "server.js",
+    mode: process.env.MODE
+}
