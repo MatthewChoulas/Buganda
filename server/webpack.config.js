@@ -21,5 +21,5 @@ module.exports  = {
         }
     },
 
-    mode:process.env.MODE
+    mode:'development'
 }
