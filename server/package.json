@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
     "dev": "nodemon server",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
