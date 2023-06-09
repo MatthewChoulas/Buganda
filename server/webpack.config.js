@@ -8,7 +8,7 @@ module.exports  = {
     },
     output: {
         path: path.resolve(process.cwd(), '.build'),
-        filename: '[name].bundle.js'
+        filename: 'bundle.js'
     },
     plugins: [
         new NodePolyFillPlugin()
@@ -19,5 +19,7 @@ module.exports  = {
             "os": false,
             "path": false,
         }
-    }
+    },
+
+    mode:process.env.MODE
 }

@@ -29,6 +29,7 @@ export default function DateSelect({label, defaultValue, setValue}) {
                         value={dateValue}
                         onChange={handleUpdate}
                         asSingle={true}
+                        
                         />
                 </div>
         </div>
