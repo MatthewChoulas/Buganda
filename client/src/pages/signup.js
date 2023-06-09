@@ -33,10 +33,10 @@ function Signup() {
   
   return (
     
-    <section className="bg-gray-50 dark:bg-gray-900 h-screen">
+    <section className="flex bg-gray-50 dark:bg-gray-900 h-screen">
   <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <div className="flex gap-2 items-center mb-6 text-3xl font-semibold text-gray-900 dark:text-white">
-      <img className="w-12 h-12" src={logo} alt="logo"></img>
+      <div className="flex gap-2 items-center mb-6 text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white">
+      <img className="md:w-12 md:h-12 w-8 h-8" src={logo} alt="logo"></img>
           Buganda Geneology
       </div>
       {error && <div className="w-full sm:max-w-md flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
@@ -46,7 +46,7 @@ function Signup() {
                 <span className="font-medium">Warning!</span> {error}
             </div>
             </div>}
-      <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-full bg-white rounded-lg shadow dark:border md:max-w-lg md:w-[25rem] xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Create a new account

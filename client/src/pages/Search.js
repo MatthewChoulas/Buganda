@@ -65,21 +65,21 @@ export default function Search() {
                             <GenericRadioInput label="Sort By:" defaultValue="Min Depth" id="sortingRadioSelect" options={["Min Depth", "Max Depth", "Clan"]} setValue={setSortingValue}></GenericRadioInput>
                         </div>
 
-                        <div className="mt-8 py-3 bg-gray-50 rounded-lg border border-gray-300 px-3 w-[38rem]">
-                            <div className="inline flex space-x-3">
-                                <div className="w-2/6">
+                        <div className="mt-8 py-3 bg-gray-50 rounded-lg border border-gray-300 px-3md:w-[38rem]">
+                            <div className="inline flex flex-col md:flex-row space-x-3 pr-2">
+                                <div className="md:w-2/6 pl-2">
                                     <GenericTextInput label="Keyword" defaultValue="" setValue={setSearchKeyword}/>
                                 </div>
-                                <div className="w-1/6">
+                                <div className="md:w-1/6">
                                     <GenericTextInput label="Min Depth" defaultValue={"0"} setValue={setMinSearchDepth} numberInput={true}/>
                                 </div>
-                                <div className="w-1/6">
+                                <div className="md:w-1/6">
                                     <GenericTextInput label="Max Depth" defaultValue={"1000"} setValue={setMaxSearchDepth} numberInput={true}/>
                                 </div>
-                                <div className="w-1/6">
+                                <div className="md:w-1/6">
                                     <DropDownSelect label="Gender" defaultValue="All" options={["All", "Male", "Female"]} setValue={setGenderFilter}/>
                                 </div>
-                                <div className="w-1/6">
+                                <div className="md:w-1/6">
                                     <DropDownSelect label="Clan" defaultValue="All" options={["All", "Njovu"]} setValue={setClanFilter}/>
                                 </div>
                             </div>

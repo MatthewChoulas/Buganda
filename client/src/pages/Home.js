@@ -28,21 +28,21 @@ export default function Home() {
         <div> 
             <div className=" w-screen w-max-screen overflow-hidden h-screen max-h-screen flex flex-col">
                 <Navbar></Navbar> 
-                <div className=" bg-blue-600 flex flex-col items-center flex-1">
-                    <h1 className="mt-[5vh] text-sky-100 max-w-[40rem] text-center text-3xl ">
-                        Explore your Buganda ancestry and connect with real people
+                <div className=" bg-blue-600 flex flex-col items-center flex-1 justify-between py-16 md:py-8">
+                    <h1 className=" px-3 text-sky-100 max-w-[40rem] text-center text-3xl ">
+                        Explore your Buganda Ancestry and Connect with real People
                     </h1>
-                    <button className="rounded-full mt-[5vh] w-32 h-8 text-sm bg-sky-500 text-white opacity-70" onClick={scrollDown}>Discover Clan</button>
-                    <div className="grid flex flex-1">
-                        <img className={`self-end h-[50vh] border-left-4 opacity-75 rounded-lg shadow-2xl mb-[4vh] ${scrollEvent ? "" : "blur-[2px]"}`} src={landscapePhoto}/>
+                    <button className="rounded-full w-32 h-8 text-sm bg-sky-500 text-white opacity-70" onClick={scrollDown}>Discover Clan</button>
+                    <div className="grid flex ">
+                        <img className={`w-[85vw] md:w-auto md:h-[50vh] border-left-4 opacity-75 rounded-lg shadow-2xl ${scrollEvent ? "" : "blur-[2px]"}`} src={landscapePhoto}/>
                     </div>
                     
                 </div>
                 
             </div>
-            <div className="flex text-white" id="middle">
-                <div className="bg-[#011936] w-1/2 flex flex-col items-center ">
-                    <div className="w-[30vw] flex flex-col items-start">
+            <div className="flex md:flex-row flex-col text-white" id="middle">
+                <div className="bg-[#011936] md:w-1/2 flex flex-col items-center ">
+                    <div className="md:w-[30vw] w-[60vw] flex flex-col items-start">
                         <h2 className="mt-[10vh] text-white max-w-[40rem] text-center text-3xl "> Njovu Clan - Elephant</h2>
                         <img className="flex-1 mt-[5vh] border-left-4 opacity-75 rounded-lg shadow-2xl mb-[4vh]" src={njovu}/>
                         <h2 className="mt-[3vh] mb-4 text-white max-w-[40rem] text-center text-2xl "> General Info</h2>
@@ -57,7 +57,7 @@ export default function Home() {
                </div>
                     
                 <div className="bg-[#EF6F6C] flex flex-col items-center flex-1">
-                    <div className="w-[40vw] flex flex-col items-start">
+                    <div className="md:w-[40vw] w-[80vw]  flex flex-col items-start">
                         <h2 className="mt-[10vh] mb-4 text-white max-w-[40rem] text-center text-2xl "> Clan Elders</h2>
                         
                         <div className="ml-4">

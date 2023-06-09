@@ -9,9 +9,9 @@ export default function KingProfile(props) {
 
     return (
     <div>
-        {(!hoverState) && <div class=" w-[18rem] flex rounded-xl bg-white shadow-lg overflow-hidden" onMouseEnter={()=>setHoverState(true)} onMouseLeave={()=>setHoverState(false)}>
+        {(!hoverState) && <div class="self-center md:w-[18rem] flex rounded-xl bg-white shadow-lg overflow-hidden" onMouseEnter={()=>setHoverState(true)} onMouseLeave={()=>setHoverState(false)}>
             <div class="flex flex-col" >
-                <img className="h-[23rem]" src={photo}></img>
+                <img className="md:h-[23rem]" src={photo}></img>
                 <div className="mx-6">
                     <p className="mb-3 mt-6 text-sm text-gray-500">{year} </p>
                     <div className="flex gap-3 mb-6">
@@ -25,9 +25,9 @@ export default function KingProfile(props) {
             </div>
         </div>}
 
-        {hoverState && <div class="w-[18rem] flex rounded-xl -translate-y-1 -translate-x-1 bg-white shadow-2xl overflow-hidden" onMouseEnter={()=>setHoverState(true)} onMouseLeave={()=>setHoverState(false)}>
+        {hoverState && <div class="self-center md:w-[18rem] flex rounded-xl -translate-y-1 -translate-x-1 bg-white shadow-2xl overflow-hidden" onMouseEnter={()=>setHoverState(true)} onMouseLeave={()=>setHoverState(false)}>
             <div class="flex flex-col" >
-                <img className="h-[23rem]" src={photo}></img>
+                <img className="md:h-[23rem]" src={photo}></img>
                 <div className=" mx-6">
                     <p className="mb-3 mt-6 text-sm text-gray-500">{year}</p>
                 <div className="flex gap-3 cursor-pointer mb-6" onClick={()=>setDropDownOpen(!dropDownOpen)}>

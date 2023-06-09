@@ -218,12 +218,11 @@ export default function Kings() {
         <div> 
             <div className=" w-screen bg-gray-100 w-max-screen flex flex-col">
                 <Navbar></Navbar>
-                    <div className="w-screen h-40 px-32 py-12 bg-gray-600">
+                    <div className="flex w-screen items-center h-40 md:px-32 md:py-12 px-10 py-4 bg-gray-600">
                     <p className="text-4xl font-semibold text-white">Bassekabaka - Past Kings</p> 
                     </div> 
-                    <div className="grid grid-cols-4 gap-4 px-32 py-20">
-                        {kingsData.map((data) => <KingProfile {...data}/>)}
-                        
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 gap-4 md:mx-32 md:my-20 px-10 py-4">
+                        {kingsData.map((data) => <KingProfile {...data}/>)}    
                 </div>
             </div>
             <Footer></Footer>

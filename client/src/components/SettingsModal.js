@@ -143,17 +143,17 @@ export default function SettingsModal({open, closeFunc}) {
                 <h1 className="text-2xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Account Settings
                 </h1>
-                <div className="flex">
-                    <div className="relative border overflow-hidden rounded-full" onMouseEnter={() => setPicHover(true)} onMouseLeave={() => setPicHover(false)}>
+                <div className="flex items-center">
+                    <div className="flex-shrink-0 relative border overflow-hidden rounded-full" onMouseEnter={() => setPicHover(true)} onMouseLeave={() => setPicHover(false)}>
                         <img className="h-36 w-36" src={`${profilePic ? profilePic : "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"}`} alt=""/>
                         <input className="hidden" type="file" id="file" onChange={handleFileChange}></input>
                         <label className={`absolute bottom-0 leading-7 cursor-pointer text-white text-center h-10 w-36 bg-[rgb(0,0,0,0.7)] text-xs ${picHover ? "visible" : "hidden"}`} for="file">Choose Photo</label>
                     </div>
-                    <div>
-                        <p className="ml-6 mt-8 font-semibold text-xl">
+                    <div className="max-w-60 ml-8 ">
+                        <p className="break-words font-semibold text-xl">
                             {userData ? userData.firstName + " " + userData.lastName : ""}
                         </p>
-                        <p className="ml-8 text-gray-700 mt-3">
+                        <p className="break-all text-gray-700 mt-3">
                             {currentUser.email}
                         </p>
                     </div>
