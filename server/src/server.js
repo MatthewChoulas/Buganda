@@ -8,12 +8,12 @@ const { storage } = require('./firebase')
 const { ref, getDownloadURL} = require('firebase/storage')
 
 
-app.use(cors)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 
 app.post("/api/getUserData", async (req, res) => {
+    console.log("request made")
     const userDataRef = doc(db, "users", req.body.currentUser)
     const retrievedData = await getDoc(userDataRef)
     res.send(retrievedData.data())
