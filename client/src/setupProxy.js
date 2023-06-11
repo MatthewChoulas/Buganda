@@ -5,7 +5,8 @@ module.exports = function (app) {
     '/api',
     createProxyMiddleware({
       target: process.env.SERVER,
-      changeOrigin: true
+      changeOrigin: true,
+      secure: true
     }),
   );
 };
