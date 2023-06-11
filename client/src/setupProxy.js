@@ -7,7 +7,7 @@ module.exports = function (app) {
       target: process.env.REACT_APP_SERVER,
       changeOrigin: true,
       secure: true
-    }),
+    })
   );
 };
 

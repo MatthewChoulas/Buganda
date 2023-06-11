@@ -43,8 +43,7 @@ export default function SettingsModal({open, closeFunc}) {
 
     // makes request to server to get user data and sets userDataState to the servers response
     useEffect(() => {
-        console.log("hi",process.env.REACT_APP_SERVER)
-        fetch("/api/getUserData", {
+        fetch(`${process.env.REACT_APP_SERVER}/api/getUserData`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
