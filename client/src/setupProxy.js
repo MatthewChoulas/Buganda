@@ -1,3 +1,5 @@
+
+
 const {createProxyMiddleware} = require('http-proxy-middleware');
 
 
@@ -7,6 +9,8 @@ module.exports = function (app) {
     createProxyMiddleware({
       target: process.env.SERVER,
       changeOrigin: true,
+      secure: true
     }),
   );
 };
+

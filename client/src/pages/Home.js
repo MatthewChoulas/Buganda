@@ -22,7 +22,6 @@ export default function Home() {
     }, [])
 
     const scrollDown = () => document.getElementById('middle').scrollIntoView()
-    
 
     return (
         <div> 
