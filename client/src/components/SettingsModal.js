@@ -167,7 +167,7 @@ export default function SettingsModal({open, closeFunc}) {
                         </div>
 
                         <div className="ml-2 w-1/2">
-                            <GenericTextInput label="Last Name" defaultValue={userData?.lastName} setValue={setLastName} displayRequired={showRequired}/>
+                            <GenericTextInput label="Last Name (Surname)" defaultValue={userData?.lastName} setValue={setLastName} displayRequired={showRequired}/>
                         </div>
 
                     </div>
