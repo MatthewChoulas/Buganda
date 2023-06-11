@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 const { storage } = require('./firebase')
 const { ref, getDownloadURL} = require('firebase/storage')
 
-
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
