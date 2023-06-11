@@ -35,7 +35,7 @@ export default function({defaultValues, setValue}) {
             highlight: false
             } 
         await fetch(
-                "/api/searchForName", {
+            `${process.env.REACT_APP_SERVER}/api/searchForName`, {
                     method: "POST",
                     headers: {
                         'Accept': 'application/json',

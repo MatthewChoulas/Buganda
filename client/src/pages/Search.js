@@ -26,7 +26,7 @@ export default function Search() {
 
     async function handleSearch() {
         setSearchDisabled(true)
-        await fetch("/api/search", {
+        await fetch(`${process.env.REACT_APP_SERVER}/api/search`, {
             method:"POST",
             headers: {
                 'Accept': 'application/json',

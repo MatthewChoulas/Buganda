@@ -68,7 +68,7 @@ export default function SettingsModal({open, closeFunc}) {
         } else {
             setShowRequired(false)
             try {
-                await fetch("/api/updateUserData", {
+                await fetch(`${process.env.REACT_APP_SERVER}/api/updateUserData`, {
                     method: 'PUT',
                     headers: {
                         'Accept': 'application/json',

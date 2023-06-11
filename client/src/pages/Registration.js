@@ -37,7 +37,7 @@ export default function Registration() {
     
     // makes request to server to get user data and sets userDataState to the servers response
     useEffect(() => {
-        fetch("/api/getUserData", {
+        fetch(`${process.env.REACT_APP_SERVER}/api/getUserData`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -63,7 +63,7 @@ export default function Registration() {
         } else {
             setShowRequired(false)
             try {
-                await fetch("/api/updateUserData", {
+                await fetch(`${process.env.REACT_APP_SERVER}/api/updateUserData`, {
                     method: 'PUT',
                     headers: {
                         'Accept': 'application/json',
