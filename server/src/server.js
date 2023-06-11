@@ -6,7 +6,6 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const { storage } = require('./firebase')
 const { ref, getDownloadURL} = require('firebase/storage')
-require('custom-env').env(process.env.MODE)
 
 
 app.use(bodyParser.json())
