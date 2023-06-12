@@ -43,7 +43,7 @@ export default function Home() {
                 <div className="bg-[#011936] md:w-1/2 flex flex-col items-center ">
                     <div className="md:w-[30vw] w-[60vw] flex flex-col items-start object-contain">
                         <h2 className="mt-[10vh] text-white max-w-[40rem] text-center text-3xl "> Njovu Clan - Elephant</h2>
-                        <img className="flex-1 max-h-full mt-[5vh] border-left-4 opacity-75 rounded-lg shadow-2xl mb-[4vh]" src={njovu}/>
+                        <img className="flex-1 max-h-[20vh] mt-[5vh] border-left-4 opacity-75 rounded-lg shadow-2xl mb-[4vh]" src={njovu}/>
                         <h2 className="mt-[3vh] mb-4 text-white max-w-[40rem] text-center text-2xl "> General Info</h2>
                         <div className="ml-4">
                             <p className="mb-1">Ow'Akasolya (Clan Head): Mukalo</p>
