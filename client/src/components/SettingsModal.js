@@ -27,7 +27,7 @@ export default function SettingsModal({open, closeFunc}) {
     const [clan, setClan] = useState('')
     const [description, setDescription] = useState('')
     const [relations, setRelations] = useState([])
-    const [phoneVisibility, setPhoneVisibility] = useState(true)
+    const [profileVisibility, setProfileVisibility] = useState(true)
 
     //stores profilePic url
     const [profilePic, setProfilePic] = useState()
@@ -85,7 +85,7 @@ export default function SettingsModal({open, closeFunc}) {
                     clan: clan,
                     relations: relations,
                     description: description,
-                    phoneNumberVisibility: phoneVisibility
+                    profileVisibility: profileVisibility
                 }})
             })
                 window.location.reload()
@@ -175,13 +175,13 @@ export default function SettingsModal({open, closeFunc}) {
                         <div className="w-3/5">
                             <GenericTextInput label="Phone Number" defaultValue={userData?.phoneNumber} setValue={setPhoneNumber}/>
                         </div>
-                        <ToggleSelect label="Profile Visibility" defaultValue={userData ? userData.phoneNumberVisibility : true} setValue={setPhoneVisibility}/>
+                        <ToggleSelect label="Profile Visibility" defaultValue={userData ? userData.profileVisibility : true} setValue={setProfileVisibility}/>
                     </div>
                     <GenericTextInput label="Address (Local Village)" defaultValue={userData?.address} setValue={setAddress}/>
                     <GenericTextInput label="City" defaultValue={userData?.city} setValue={setCity}/>
                     <GenericRadioInput label="Gender" id="registrationGender" defaultValue={userData?.gender} options={["Male", "Female", "Other"]} setValue={setGender}/>
                     <DateSelect label="Date of Birth" defaultValue={userData?.dateOfBirth} setValue={setDate}/>
-                    <DropDownSelect label="Clan" defaultValue={userData?.clan} options={["Njovu"]} setValue={setClan}/>
+                    <DropDownSelect label="Clan" defaultValue={"Njovu"} options={["Njovu"]} setValue={setClan}/>
                     <GenericTextInput label="Short Personal Description" defaultValue={userData?.description} setValue={setDescription}/>
                     <div className="block pt-4">
                         <label className="block font-semibold mb-4 text-lg font-medium text-gray-900 dark:text-white">Add Relatives</label>

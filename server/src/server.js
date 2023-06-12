@@ -82,18 +82,16 @@ async function breathFirstSearch(dataRef, queue, visited, filters){
         if ((filters.clan == currPerson.clan || filters.clan == "All") && (filters.gender == currPerson.gender || filters.gender == "All") && currPerson.depth > filters.minDepth){ 
             const profileText = Object.values(currPerson).join("|")
             if (filters.keyword.trim() == "" || checkKeyword(filters.keyword, profileText)){
+                if (currPerson.profileVisibility) {
                 
-                currPerson.age = getAge(currPerson.dateOfBirth?.startDate)
+                    currPerson.age = getAge(currPerson.dateOfBirth?.startDate)
 
-                if (!currPerson.phoneNumberVisibility) {
-                    currPerson.phoneNumber = "●●●-●●●-●●●●"
+                    await getDownloadURL(ref(storage, `images/${currPerson.id}`)).then((url) => {
+                        currPerson.photo = url
+                    }).catch(err=> console.log(err))
+
+                    bfsResult.push(currPerson)
                 }
-
-                await getDownloadURL(ref(storage, `images/${currPerson.id}`)).then((url) => {
-                    currPerson.photo = url
-                }).catch(err=> console.log(err))
-
-                bfsResult.push(currPerson)
             }
                 
         }

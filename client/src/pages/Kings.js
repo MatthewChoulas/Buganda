@@ -221,7 +221,7 @@ export default function Kings() {
                     <div className="flex w-screen items-center h-40 md:px-32 md:py-12 px-10 py-4 bg-gray-600">
                     <p className="text-4xl font-semibold text-white">Bassekabaka - Past Kings</p> 
                     </div> 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 gap-4 md:mx-32 md:my-20 px-10 py-4">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 gap-6 md:my-20 px-10 py-4">
                         {kingsData.map((data) => <KingProfile {...data}/>)}    
                 </div>
             </div>

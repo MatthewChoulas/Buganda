@@ -60,26 +60,26 @@ export default function Search() {
                         Geneology Search
                     </h1>
 
-                    <div className="flex gap-4">
-                        <div className="mt-8 py-3 bg-gray-50 rounded-lg border border-gray-300 px-3 max-w-[10rem] w-[12rem]">
+                    <div className="flex flex-wrap gap-4">
+                        <div className="w-full mt-8 py-3 bg-gray-50 rounded-lg border border-gray-300 px-3 md:w-[10rem] min-w-[10rem]">
                             <GenericRadioInput label="Sort By:" defaultValue="Min Depth" id="sortingRadioSelect" options={["Min Depth", "Max Depth", "Clan"]} setValue={setSortingValue}></GenericRadioInput>
                         </div>
 
-                        <div className="mt-8 py-3 bg-gray-50 rounded-lg border border-gray-300 px-3md:w-[38rem]">
-                            <div className="inline flex flex-col md:flex-row space-x-3 pr-2">
-                                <div className="md:w-2/6 pl-2">
+                        <div className="mt-4 md:mt-8 py-3 bg-gray-50 rounded-lg border border-gray-300 px-3 w-full md:w-[38rem]">
+                            <div className="inline grid grid-cols-3 md:grid-cols-6 gap-4">
+                                <div className="col-span-2">
                                     <GenericTextInput label="Keyword" defaultValue="" setValue={setSearchKeyword}/>
                                 </div>
-                                <div className="md:w-1/6">
+                                <div className="">
                                     <GenericTextInput label="Min Depth" defaultValue={"0"} setValue={setMinSearchDepth} numberInput={true}/>
                                 </div>
-                                <div className="md:w-1/6">
+                                <div className="">
                                     <GenericTextInput label="Max Depth" defaultValue={"1000"} setValue={setMaxSearchDepth} numberInput={true}/>
                                 </div>
-                                <div className="md:w-1/6">
+                                <div className="">
                                     <DropDownSelect label="Gender" defaultValue="All" options={["All", "Male", "Female"]} setValue={setGenderFilter}/>
                                 </div>
-                                <div className="md:w-1/6">
+                                <div className="">
                                     <DropDownSelect label="Clan" defaultValue="All" options={["All", "Njovu"]} setValue={setClanFilter}/>
                                 </div>
                             </div>
