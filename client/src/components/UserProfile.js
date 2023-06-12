@@ -11,7 +11,7 @@ export default function UserProfile({name, location, phoneNumber, gender, age, d
                         <img class="md:h-24 md:w-24 h-16 w-16 rounded-full" src={photo} alt=""/>
                     </div>
                     <div className="flex flex-col bg-gray-100 w-[17rem] md:w-[24rem] pl-4 md:pl-8 text-sm md:text-base">
-                        <div className="grid gap-y-3 gap-x-8 pt-4 grid-cols-4 mb-1 border">
+                        <div className="grid gap-y-3 gap-x-8 pt-4 grid-cols-4 mb-1">
                             <span className="font-semibold">Gender: </span>
                             <span className="">{gender}</span>
                             <span className="pl-7 font-semibold">Age: </span>
