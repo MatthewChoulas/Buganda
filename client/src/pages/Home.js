@@ -41,7 +41,7 @@ export default function Home() {
             </div>
             <div className="flex md:flex-row flex-col text-white" id="middle">
                 <div className="bg-[#011936] md:w-1/2 flex flex-col items-center ">
-                    <div className="md:w-[30vw] w-[60vw] flex flex-col items-start">
+                    <div className="md:w-[30vw] w-[60vw] flex flex-col items-start object-contain">
                         <h2 className="mt-[10vh] text-white max-w-[40rem] text-center text-3xl "> Njovu Clan - Elephant</h2>
                         <img className="flex-1 mt-[5vh] border-left-4 opacity-75 rounded-lg shadow-2xl mb-[4vh]" src={njovu}/>
                         <h2 className="mt-[3vh] mb-4 text-white max-w-[40rem] text-center text-2xl "> General Info</h2>

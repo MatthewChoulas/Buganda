@@ -41,6 +41,7 @@ export default function() {
         navigate("/")
         
     }
+    console.log(window.screen.width)
 
     ReactDom.render(<div className={`fixed ${sideBarOpen ? "" : "hidden"} z-1001 overflow-y-scroll left-0 top-0 right-0 bottom-0 bg-gray-700 bg-opacity-75`} onClick={handleClickOut}></div>, document.getElementById("portal"))
 
@@ -113,7 +114,7 @@ export default function() {
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <div class="relative ml-3 mr-3">
                             <div>
-                                <button type="button" onClick={()=>setDropDownOpen((prevState) => !prevState)}class="flex items-center text-white justify-center rounded-full" id="user-menu-button">
+                                <button type="button" onClick={()=>{window.screen.width > 1000 ? setDropDownOpen((prevState) => !prevState) : setDropDownOpen(false)}} class="flex items-center text-white justify-center rounded-full" id="user-menu-button">
                                 
                                 <div class="md:mr-10 hidden md:block">
                                     <span>{currentUser.email}</span>
@@ -123,7 +124,7 @@ export default function() {
                             </div>
 
                             <div id="dropdown" onMouseLeave={()=>setDropDownOpen(false)} class={`${dropDownOpen ? "" : "hidden" } absolute right-0 top-10 z-10 py-2 w-48 bg-white rounded-lg text-gray-800 shadow-xl`}>
-                                    <a onClick={()=>setSettingsOpen(true)} class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">Account Settings</a>
+                                    <a onClick={()=> setSettingsOpen(true)} class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">Account Settings</a>
                                     <a onClick={logout} class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
                             </div>
                         </div>
@@ -131,7 +132,7 @@ export default function() {
                     </div>
                 </div>
                 </nav>
-            <SettingsModal open={settingsOpen} closeFunc={()=>setSettingsOpen(false)}></SettingsModal>
+            <SettingsModal open={settingsOpen} closeFunc={()=> setSettingsOpen(false)}></SettingsModal>
             </div>
         </div>
     )
