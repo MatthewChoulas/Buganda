@@ -5,6 +5,6 @@ var serviceAccount = require("../bugandaService.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
-const uid = "YT8GwPSXCbNhzkO3oO82KyCS4tq1"
-admin.getAuth().setCustomUserClaims(uid, {admin: true}).then((res) => { console.log(res)})
+const uid = "tSNvutsU9kQY542zxAE4GbClDWI2"
+admin.auth().setCustomUserClaims(uid, {admin: true}).then((res) => { console.log(res)})
 console.log("done")
