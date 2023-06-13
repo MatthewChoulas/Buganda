@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect} from 'react'
 import {auth} from "../util/firebase"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth"
 
 const AuthContext = React.createContext()
 
@@ -20,6 +20,18 @@ export function AuthProvider({ children }) {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
+    async function checkAdmin(user) {
+        if (user) {
+            console.log("running")
+            user.getIdTokenResult()
+        .then((idTokenResult) => {
+            user.admin = idTokenResult.claims.admin ? true : false
+            console.log(user.admin)
+            setCurrentUser(user)
+        })
+        }
+    }
+
     function logout() {
         signOut(auth)
     }
@@ -36,13 +48,15 @@ export function AuthProvider({ children }) {
 
     auth.onAuthStateChanged(user => {
         setCurrentUser(user)
+        checkAdmin(user)
     })
 
     const value = {
         currentUser,
         signup,
         login,
-        logout
+        logout,
+        checkAdmin
     }
 
     return (

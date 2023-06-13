@@ -113,7 +113,25 @@ export default function SettingsModal({open, closeFunc}) {
     useEffect(()=> {
             getDownloadURL(ref(storage, `images/${currentUser.uid}`)).then((url) => {
                 setProfilePic(url)
-            }).catch(err=> console.log(err))
+            }).catch((error)=> {
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                      // File doesn't exist
+                      break;
+                    case 'storage/unauthorized':
+                      // User doesn't have permission to access the object
+                      break;
+                    case 'storage/canceled':
+                      // User canceled the upload
+                      break;
+              
+                    // ...
+              
+                    case 'storage/unknown':
+                      // Unknown error occurred, inspect the server response
+                      break;
+                }
+            })
     }, [])
 
 
@@ -154,7 +172,7 @@ export default function SettingsModal({open, closeFunc}) {
                             {userData ? userData.firstName + " " + userData.lastName : ""}
                         </p>
                         <p className="break-all text-gray-700 mt-3">
-                            {currentUser.email}
+                        {currentUser.email.endsWith("@buganda.com") ? currentUser.email.slice(0, -12) : currentUser.email}
                         </p>
                     </div>
                 </div>
@@ -189,7 +207,7 @@ export default function SettingsModal({open, closeFunc}) {
                     </div>
 
                     {showRequired && <div className="w-full sm:max-w-md flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                    <svg aria-hidden="true" className="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                    <svg aria-hidden="true" className="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"></path></svg>
                     <span className="sr-only">Info</span>
                     <div>
                          "One or more required fields are missing"

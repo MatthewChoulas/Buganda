@@ -7,7 +7,9 @@ import landscapePhoto from '../assets/landscape.jpeg'
 import njovu from '../assets/njovuClan.jpeg'
 
 export default function Home() {
-    
+
+    const { currentUser } = useAuth()
+
 
     const [scrollEvent, setScrollEvent] = useState(false)
 
@@ -20,6 +22,12 @@ export default function Home() {
             setScrollEvent(scrolled>100)
         })
     }, [])
+
+    async function getCustomClaims() {
+    await currentUser.getIdTokenResult().then(token => {
+        console.log(token.claims.admin)})
+    }
+    getCustomClaims()
 
     const scrollDown = () => document.getElementById('middle').scrollIntoView()
 
