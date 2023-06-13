@@ -147,7 +147,7 @@ app.post("/api/search", async (req, res) => {
         bfsResult.reverse()
     }
 
-    let sortedResult = req.body.sorting == "Max Depth" ? bfsResult.sort(d1, d2 => d1.depth - d2.depth) : bfsResult.sort(d1, d2 => d2.depth - d1.depth)
+    let sortedResult = req.body.sorting == "Max Depth" ? bfsResult.sort((d1, d2) => d1.depth - d2.depth) : bfsResult.sort((d1, d2) => d2.depth - d1.depth)
 
     res.send(sortedResult)
 })
