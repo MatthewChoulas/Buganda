@@ -98,12 +98,6 @@ export default function() {
                                 <span className="flex-1 ml-3 whitespace-nowrap">Edit Profile</span>
                                 </a>
                             </li>
-                            {currentUser.admin && <li>
-                                <a href="#" onClick={()=>navigate("/Admin")} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 512 512"><path d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17v80c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V448h40c13.3 0 24-10.7 24-24V384h40c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"/></svg>
-                                <span className="flex-1 ml-3 whitespace-nowrap">Admin</span>
-                                </a>
-                            </li>}
                             <li>
                                 <a href="#" onClick={()=>{setSideBarOpen(false); logout()}} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd"></path></svg>
@@ -154,7 +148,7 @@ export default function() {
                     </div>
                 </div>
                 </nav>
-            <SettingsModal open={settingsOpen} closeFunc={()=> setSettingsOpen(false)}></SettingsModal>
+            <SettingsModal userEmail={currentUser.email} userUID={currentUser.uid} open={settingsOpen} closeFunc={()=> setSettingsOpen(false)}></SettingsModal>
             </div>
         </div>
     )

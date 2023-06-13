@@ -11,9 +11,9 @@ import ToggleSelect from './ToggleSelect'
 import { storage} from '../util/firebase'
 import { ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import { useAuth } from '../contexts/AuthContext'
+import root from './popupRoot'
 
-export default function SettingsModal({open, closeFunc}) {
-    const { currentUser } = useAuth()
+export default function SettingsModal({userUID, userEmail, open, closeFunc, updateApproved=false}) {
     const navigate = useNavigate()
 
     //Data entry states
@@ -43,20 +43,21 @@ export default function SettingsModal({open, closeFunc}) {
 
     // makes request to server to get user data and sets userDataState to the servers response
     useEffect(() => {
+        console.log(userUID, userEmail)
         fetch(`${process.env.REACT_APP_SERVER}/api/getUserData`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
               },
-            body: JSON.stringify({currentUser: currentUser.uid})
+            body: JSON.stringify({currentUser: userUID})
         }).then(
             response => response.json()
         ).then(
             data => {
                 setUserData(data)
             }
-        )
+        ).catch(error => {console.log(error)})
     }, [])
     
     //checks that required field(first and last name) are filled out
@@ -74,7 +75,7 @@ export default function SettingsModal({open, closeFunc}) {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                       },
-                    body: JSON.stringify({currentUser: currentUser.uid, data: {
+                    body: JSON.stringify({updateApproved:updateApproved, email: userEmail, currentUser: userUID, data: {
                     firstName: firstName,
                     lastName: lastName,
                     phoneNumber: phoneNumber,
@@ -111,7 +112,7 @@ export default function SettingsModal({open, closeFunc}) {
     //loads the users profile picture from firebase storage when the model opens
     //user profiles are saved in the image directory and are named by the users UID
     useEffect(()=> {
-            getDownloadURL(ref(storage, `images/${currentUser.uid}`)).then((url) => {
+            getDownloadURL(ref(storage, `images/${userUID}`)).then((url) => {
                 setProfilePic(url)
             }).catch((error)=> {
                 switch (error.code) {
@@ -142,7 +143,7 @@ export default function SettingsModal({open, closeFunc}) {
         const file = event.target.files[0]
         if (file == null) return
         
-        const imageRef = ref(storage, `images/${currentUser.uid}`)
+        const imageRef = ref(storage, `images/${userUID}`)
         uploadBytes(imageRef, file).then(()=>{
             setProfilePic(URL.createObjectURL(file)) 
         })
@@ -172,7 +173,7 @@ export default function SettingsModal({open, closeFunc}) {
                             {userData ? userData.firstName + " " + userData.lastName : ""}
                         </p>
                         <p className="break-all text-gray-700 mt-3">
-                        {currentUser.email.endsWith("@buganda.com") ? currentUser.email.slice(0, -12) : currentUser.email}
+                        {userEmail?.endsWith("@buganda.com") ? userEmail?.slice(0, -12) : userEmail}
                         </p>
                     </div>
                 </div>
@@ -219,9 +220,9 @@ export default function SettingsModal({open, closeFunc}) {
                 </div>
                 </div>
                 </div>
-        </div>
+        </div>,
+        document.getElementById("portal")
 
-        ,
-       document.getElementById("portal")
+    
     )
 }

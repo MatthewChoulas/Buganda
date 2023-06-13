@@ -5,16 +5,79 @@ import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import UserDataRow from '../components/UserDataRow'
 import SearchBar from '../components/SearchBar'
+import DropDownSelect from '../components/DropDownSelect'
 
 export default function Admin() {
 
     const { currentUser, checkAdmin } = useAuth()
     const [tabState, setTabState] = useState(1)
-    const [searchTerm, setSearchTerm] = useState("Search")
+    const [searchTerm, setSearchTerm] = useState("")
+    const [searchDB, setSearchDB ] = useState("Geneology Database")
+    const [searchDisabled, setSearchDisabled] = useState(false)
+    const [searchResults, setSearchResults] = useState([])
+    const [newUsers, setNewUsers] = useState([])
+    const [pendingChanges, setPendingChanges] = useState([])
 
     useEffect(() => {
         checkAdmin(currentUser)
     }, [])  
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_SERVER}/api/adminGetNewUsers`, {
+            method:"GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }
+        }).then(response => response.json())
+        .then(data => setNewUsers(data))
+    }, []) 
+
+    useEffect( () => {
+        fetch(`${process.env.REACT_APP_SERVER}/api/adminGetPendingChanges`, {
+            method:"GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }
+        }).then(response => response.json())
+        .then(data => setPendingChanges(data))
+    }, []) 
+
+    async function handleSearch() {
+        setSearchDisabled(true)
+        await fetch(`${process.env.REACT_APP_SERVER}/api/adminSearch`, {
+            method:"POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+                searchTerm: searchTerm
+            })
+        }).then(response => response.json())
+        .then(data => setSearchResults(data))
+        setSearchDisabled(false)
+        
+    }
+
+    console.log(pendingChanges)
+
+    
+    
+    function removeNewUser(index) {
+        setNewUsers(prevArray => prevArray.slice(0, index).concat(prevArray.splice(index+1)))
+    }
+
+    function removePendingChange(index) {
+        setPendingChanges(prevArray => prevArray.slice(0, index).concat(prevArray.splice(index+1)))
+    }
+
+    function removeSearchResult(index) {
+        setSearchResults(prevArray => prevArray.slice(0, index).concat(prevArray.splice(index+1)))
+    }
+    
+
 
     return (
         <div> 
@@ -95,7 +158,10 @@ export default function Admin() {
                     </div>
 
                     {tabState == 3 && (
-                        <SearchBar placeHolder={"Search"} setValue={setSearchTerm}/>
+                        <div className='mt-4 flex gap-6 text-gray-900'>
+                        <SearchBar placeHolder={"Search"} defaultValue={""} setValue={setSearchTerm}/>
+                        <button onClick={handleSearch} disabled={searchDisabled} className="w-40 text-white bg-blue-600 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
+                        </div>
                     )}
                     
                     <div className="mt-6 pl-6 flex text-gray-400 text-sm w-full"> 
@@ -107,10 +173,19 @@ export default function Admin() {
                     </div>
                     <span className=" mt-2 h-0.5 bg-gray-200 w-full"></span>
                     {tabState == 1 && (
-                        <UserDataRow name="John Doe" clan="Njovu" location="Kambugu" date="2021-10-10" deleter={()=> console.log("deleting")} userId="123"/>
+                        newUsers.map((result, index) => (
+                            <UserDataRow deleter={removeNewUser} index={index} email={result?.email} userUID={result.id} name={result.firstName + " " + result.lastName} clan={result.clan} location={result.city} photo={result.photo} date={result?.lastUpdated} userId="123" type={"new"}/>
+                            ))
                     )}
                     {tabState == 2 && (
-                        <UserDataRow name="John Doe" clan="Njovu" location="Kambugu" date="2021-10-10" deleter={()=> console.log("deleting")} userId="123" dataChange={true}/>
+                       pendingChanges.map((result, index) => (
+                        <UserDataRow deleter={removePendingChange} index={index} email={result?.email} userUID={result.id} name={result.firstName + " " + result.lastName} clan={result.clan} location={result.city} photo={result.photo} date={result?.lastUpdated}  userId="123" type={"change"}/>
+                        ))
+                    )}
+                    {tabState == 3 && (
+                        searchResults.map((result, index) => (
+                        <UserDataRow deleter={removeSearchResult} index={index} email={result?.email} userUID={result.id} name={result.firstName + " " + result.lastName} clan={result.clan} location={result.city} photo={result.photo} date={result?.lastUpdated} userId="123" type={"search"}/>
+                        ))
                     )}
 
                     

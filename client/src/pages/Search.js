@@ -48,7 +48,6 @@ export default function Search() {
         setSearchDisabled(false)
     }
 
-    console.log(profiles)
 
 
     return (
